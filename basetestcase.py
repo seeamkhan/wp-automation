@@ -18,6 +18,7 @@ each def in the general.py file.
         # Create new Chrome session
         cls.driver = webdriver.Chrome()
         # cls.driver = webdriver.PhantomJS()
+        cls.driver.maximize_window()
 
         # Navigate to site homepage
         site_url = 'http://rth.dev.lin.panth.com/'

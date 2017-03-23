@@ -83,7 +83,7 @@ class NewPost(BasePage):
             print 'Error! Upload file tab does not load.'
         self.driver.find_element_by_xpath(self.com_elem._upload_file).click()
 
-        self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '3d-landscape-wallpapers.jpg')
+        self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test.jpg')
         time.sleep(2)
         self.driver.find_element_by_xpath(self.com_elem._select_file).send_keys(self.file_path)
         # self.driver.find_element_by_xpath(self.com_elem._select_file).click()

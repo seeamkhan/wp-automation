@@ -4,7 +4,8 @@ For now, we just use dotenv and return a key.
 """
 
 
-import dotenv,os
+import dotenv
+import os
 
 def get_value(conf,key):
     "Return the value in conf for a given key"
