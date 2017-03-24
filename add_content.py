@@ -10,7 +10,7 @@ from elements import NewPostEelements
 from elements import WpVersionCheckElements
 # from elements import LoginPageCommonElements, AdminHomepageElements, AllPageCommonEelements
 from selenium.webdriver.common.action_chains import ActionChains
-import pywinauto
+# import pywinauto
 
 
 class NewPost(BasePage):
@@ -24,35 +24,35 @@ class NewPost(BasePage):
             self.driver.find_element_by_xpath(self.com_elem._menu_posts))
         post_hover_content.perform()
         time.sleep(2)
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._add_new_post)))
-        except:
-            print 'Error! Add New Post link does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._add_new_post)))
+        # except:
+        #     print 'Error! Add New Post link does not load.'
 
         self.driver.find_element_by_xpath(self.com_elem._add_new_post).click()
 
         # Insert new post title
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._add_new_post_title)))
-        except:
-            print 'Error! new post page does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._add_new_post_title)))
+        # except:
+        #     print 'Error! new post page does not load.'
 
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._title_field)))
-        except:
-            print 'Error! new post page does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._title_field)))
+        # except:
+        #     print 'Error! new post page does not load.'
 
         self.driver.find_element_by_xpath(self.com_elem._title_field).send_keys("Pantheon Test Post")
 
         # Insert new post body content
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._content_body)))
-        except:
-            print 'Error! content body field does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._content_body)))
+        # except:
+        #     print 'Error! content body field does not load.'
         # Switch to post body imce iframe
         self.driver.switch_to.frame(self.driver.find_element_by_xpath(self.com_elem._content_body))
         self.driver.find_element_by_xpath("//body").send_keys(
@@ -69,28 +69,43 @@ class NewPost(BasePage):
         self.driver.switch_to.default_content()
 
         # Upload and Insert new file into the new post
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._add_media_button)))
-        except:
-            print 'Error! add media button does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._add_media_button)))
+        # except:
+        #     print 'Error! add media button does not load.'
 
         self.driver.find_element_by_xpath(self.com_elem._add_media_button).click()
-        try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.ID, self.com_elem._upload_file)))
-        except:
-            print 'Error! Upload file tab does not load.'
+        # try:
+        #     WebDriverWait(self.driver, 3).until(
+        #         EC.presence_of_element_located((By.ID, self.com_elem._upload_file)))
+        # except:
+        #     print 'Error! Upload file tab does not load.'
         self.driver.find_element_by_xpath(self.com_elem._upload_file).click()
 
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test.jpg')
-        time.sleep(2)
-        self.driver.find_element_by_xpath(self.com_elem._select_file).send_keys(self.file_path)
+        # time.sleep(2)
+        # self.driver.find_element_by_xpath(self.com_elem._select_file).send_keys(self.file_path)
         # self.driver.find_element_by_xpath(self.com_elem._select_file).click()
         # time.sleep(2)
         # self.driver.find_element_by_xpath("//input[@id='html5_1bbaluc621fbtd6a18cf1eql1soc5']").clear()
         # time.sleep(2)
-        # self.driver.find_element_by_xpath("//input[@id='html5_1bbaluc621fbtd6a18cf1eql1soc5']").send_keys("")
+        self.driver.find_element_by_xpath(self.com_elem._input_file).send_keys(self.file_path)
+        try:
+            WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._test_file)))
+        except:
+            print 'Error! test.jpg file did not found, may be there was some problem uploading file.'
+        # Click on the Insert Into Post button
+        self.driver.find_element_by_xpath(self.com_elem._insert_into_post).click()
+
+        # Click on the Edit link for Visibility option
+        self.driver.find_element_by_xpath(self.com_elem._edit_visibility).click()
+        self.driver.find_element_by_xpath(self.com_elem._visibility_private).click()
+        self.driver.find_element_by_xpath(self.com_elem._visibility_ok_button).click()
+        # Click Publish/Update button
+        self.driver.find_element_by_xpath(self.com_elem._publish_button).click()
+
 
 
         time.sleep(3)

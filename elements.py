@@ -56,7 +56,12 @@ class NewPostEelements(BasePage):
         self._edit_visibility = "//div[@id='visibility']//a[@class='edit-visibility hide-if-no-js']"
         self._visibility_private = "//input[@value='private']"
         self._visibility_ok_button = "//a[@class='save-post-visibility hide-if-no-js button']"
+        self._publish_button = "//input[@id='publish']"
         self._content_body = "//div[@id='wp-content-editor-container']//iframe"
 
         self._upload_file = "//a[contains(text(), 'Upload Files')]"
         self._select_file = "//a[contains(text(), 'Select Files')]"
+        self._input_file = "//input[starts-with(@id,'html5_')]"
+        self._test_file = "//div[@class='media-sidebar visible']//div[starts-with(text(), 'test')]"
+        self._insert_into_post = "//button[contains(text(), 'Insert into post')]"
+
