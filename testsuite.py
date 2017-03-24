@@ -16,10 +16,10 @@ smoke_test = unittest.TestSuite(run_all_tests)
 outfile = open(dir + "/SmokeTestReport.html", "w")
 
 # run the suite
-unittest.TextTestRunner(verbosity=1).run(smoke_test)
+# unittest.TextTestRunner(verbosity=1).run(smoke_test)
 
 # configure HTMLTestRunner options
-# runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='Smoke Tests')
+runner = HTMLTestRunner.HTMLTestRunner(stream=outfile, title='Test Report', description='Smoke Tests')
 
 # run the suite using HTMLTestRunner
-# runner.run(smoke_test)
+runner.run(smoke_test)

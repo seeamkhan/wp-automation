@@ -71,3 +71,13 @@ class NewPostEelements(BasePage):
         self._new_post_title = "//h1[contains(text(), 'Private: Pantheon Test Post')]"
         self._new_post_body = "//div[@class='entry-content']"
         self._new_post_image = "//div[@class='entry-content']/p/img"
+
+        # Cleanup
+        self._admin_top_menu = "//li[@id='wp-admin-bar-site-name']"
+        self._dashboard_menu = "//a[contains(text(), 'Dashboard')]"
+        self._dashboard_page_title = "//h1[contains(text(), 'Dashboard')]"
+
+        self._all_post = "//a[@href='edit.php']"
+        self._test_post_title = "//a[contains(text(), 'Pantheon Test Post')]"
+        self._move_to_trash = "//a[contains(text(), 'Move to Trash')]"
+        self._delete_confirmation_msg = "//p[contains(text(), '1 post moved to the Trash. ')]"

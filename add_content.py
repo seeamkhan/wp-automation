@@ -16,6 +16,7 @@ class NewPost(BasePage):
     def __init__(self, driver):
         super(NewPost, self).__init__(driver)
         self.com_elem = NewPostEelements(self.driver)
+        self.test_post_title = "Pantheon Test Post"
 
     def add_new_post(self):
         # Go to add new post page
@@ -37,7 +38,7 @@ class NewPost(BasePage):
         except:
             print 'Driver did not recognize new post title field'
 
-        self.driver.find_element_by_xpath(self.com_elem._title_field).send_keys("Pantheon Test Post")
+        self.driver.find_element_by_xpath(self.com_elem._title_field).send_keys(self.test_post_title)
 
         # Insert new post body content
         try:
@@ -78,7 +79,7 @@ class NewPost(BasePage):
         self.file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'panth-test.jpg')
         self.driver.find_element_by_xpath(self.com_elem._input_file).send_keys(self.file_path)
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.ID, self.com_elem._test_file)))
         except:
             print 'Driver did not recognize panth-test.jpg file.'
@@ -87,7 +88,7 @@ class NewPost(BasePage):
 
         # Click on the Edit link for Visibility option
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.ID, self.com_elem._edit_visibility)))
         except:
             pass
@@ -95,7 +96,7 @@ class NewPost(BasePage):
         self.driver.find_element_by_xpath(self.com_elem._visibility_private).click()
         self.driver.find_element_by_xpath(self.com_elem._visibility_ok_button).click()
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.ID, self.com_elem._uncategorized)))
         except:
             print 'Driver did not recognize Uncategorized checkbox.'
@@ -106,7 +107,7 @@ class NewPost(BasePage):
 
         # View the newly created post
         try:
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.ID, self.com_elem._view_post)))
         except:
             print 'Driver did not recognize View post link.'
@@ -130,3 +131,50 @@ class NewPost(BasePage):
             print 'Error! New Post Image did not found.'
 
         time.sleep(3)
+
+    def clean_up_test_post(self):
+        # Go to admin Dashboard
+        admin_menu_hover = ActionChains(self.driver).move_to_element(self.driver.find_element_by_xpath(self.com_elem._admin_top_menu))
+        admin_menu_hover.perform()
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._dashboard_menu)))
+        except:
+            print 'Driver did not recognize Dashboard menu link.'
+        self.driver.find_element_by_xpath(self.com_elem._dashboard_menu).click()
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._dashboard_page_title)))
+        except:
+            print 'Driver did not recognize Dashboard Page title.'
+
+        # Go to All post page
+        post_hover_content = ActionChains(self.driver).move_to_element(
+            self.driver.find_element_by_xpath(self.com_elem._menu_posts))
+        post_hover_content.perform()
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._all_post)))
+        except:
+            print 'Driver did not recognize add All post link.'
+
+        self.driver.find_element_by_xpath(self.com_elem._all_post).click()
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._test_post_title)))
+        except:
+            print 'Driver did not recognize Test Post link.'
+        self.driver.find_element_by_xpath(self.com_elem._test_post_title).click()
+
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._move_to_trash)))
+        except:
+            print 'Driver did not recognize Move to trash link.'
+        self.driver.find_element_by_xpath(self.com_elem._move_to_trash).click()
+
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.ID, self.com_elem._delete_confirmation_msg)))
+        except:
+            print 'Driver did not recognize post delete confirmation message.'

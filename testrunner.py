@@ -23,6 +23,9 @@ class RunTestCases(BaseTestCase):
     def test050_add_post(self):
         NewPost(self.driver).add_new_post()
 
+    def test060_cleanup_test_post(self):
+        NewPost(self.driver).clean_up_test_post()
+
         time.sleep(1)
 if __name__ == '__main__':
     unittest.main(verbosity=2)
