@@ -19,6 +19,7 @@ class SiteUp(BasePage):
         site_name = 'Rethinkhealth'
         wp_url = "http://rth.dev.lin.panth.coms/"
 
+
         # Site is UP checking
         status = "Unknown"
         try:
@@ -39,6 +40,8 @@ class SiteOk(BasePage):
         self.com_elem = AllPageCommonEelements(self.driver)
 
     def site_check(self):
+        self.driver.get(self.com_elem.site_url)
+        print "Testing: " + self.com_elem.site_url + " site."
         site_is_up = False
         # print 'starting test now...\n'
 
@@ -81,10 +84,12 @@ class Login(BasePage):
     def __init__(self, driver):
         super(Login, self).__init__(driver)
         self.com_elem = LoginPageCommonElements(self.driver)
+        self.base_url = AllPageCommonEelements(self.driver).site_url
 
     def login_as_admin(self):
-        self.driver.get("http://rth.dev.lin.panth.com/wp-admin")
-
+        login_url = "%s/wp-admin" % self.base_url
+        # print "WP login URL is: %s" % login_url
+        self.driver.get(login_url)
         try:
             WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.ID, self.com_elem._login_email_field)))
@@ -96,7 +101,7 @@ class Login(BasePage):
                 EC.presence_of_element_located((By.ID, self.com_elem._login_pass_field)))
         except:
             print 'Error! Password field does not load.'
-
+        time.sleep(3)
         self.driver.find_element_by_id(self.com_elem._login_email_field).clear()
         self.driver.find_element_by_id(self.com_elem._login_email_field).send_keys(self.com_elem.username)
         self.driver.find_element_by_id(self.com_elem._login_pass_field).clear()
@@ -104,13 +109,8 @@ class Login(BasePage):
         self.driver.find_element_by_id(self.com_elem._login_button).click()
 
         # Verify admin login
-
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.com_elem._wp_admin_bar)))
         print 'Successfully logged in as Admin.'
-
-        # print 'Login as Admin failed.'
-
-        # print 'Login as Admin successfully.'
 
 class WpVersionCheck(BasePage):
     def __init__(self, driver):

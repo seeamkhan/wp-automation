@@ -21,9 +21,9 @@ each def in the general.py file.
         cls.driver.maximize_window()
 
         # Navigate to site homepage
-        site_url = 'http://rth.dev.lin.panth.com/'
-        cls.driver.get(site_url)
-        print "Testing: "+site_url+" site."
+        # site_url = 'http://rth.dev.lin.panth.com/'
+        # cls.driver.get(site_url)
+        # print "Testing: "+site_url+" site."
 
     @classmethod
     def tearDownClass(cls):

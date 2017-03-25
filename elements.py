@@ -10,6 +10,8 @@ class AllPageCommonEelements(BasePage):
     def __init__(self, driver):
         super(AllPageCommonEelements, self).__init__(driver)
 
+        self.site_url = 'http://rth.dev.lin.panth.com'
+
         # Page elements
         self._page = "//div[@id='page']"
         self._site_logo = ".//div[@class='branding']"
@@ -65,6 +67,7 @@ class NewPostEelements(BasePage):
         self._input_file = "//input[starts-with(@id,'html5_')]"
         self._test_file = "//div[@class='media-sidebar visible']//div[starts-with(text(), 'panth-test')]"
         self._insert_into_post = "//button[contains(text(), 'Insert into post')]"
+        self._modal_close_button = "//button[@class = 'button-link media-modal-close']"
 
         self._view_post = "//a[contains(text(), 'View post')]"
 
